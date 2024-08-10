@@ -1,0 +1,13 @@
+{"body":"{\"auto_loan\":{\"min_payment\":62370,\"balance\":2900000,\"interest\":16.99},\"mortgage\":{\"min_payment\":10000,\"balance\":670000,\"interest\":11.75}}"}
+
+{"body":""}
+{"body":"{\"debts\":[{\"name\":\"debt1\"},{\"name\":\"debt2\"}]}"}
+
+{
+  "debts": [
+    {"name": "debt1"},
+    {
+      "name": "debt2"
+    }
+  ]
+}
