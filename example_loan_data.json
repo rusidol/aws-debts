@@ -1,0 +1,12 @@
+{
+  "auto_loan": {
+    "min_payment": 62370.00,
+    "balance": 2900000.00,
+    "interest": 16.99
+  },
+  "mortgage": {
+    "min_payment": 10000.00,
+    "balance": 670000.00,
+    "interest": 11.75
+  }
+}
