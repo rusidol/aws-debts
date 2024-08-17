@@ -1,1 +1,20 @@
-{'debts':[{'name':'debt1'},{'name':'debt2'}]}
+{
+  "extra": "10000.00",
+  "strategy": "snowball",
+  "debts": [
+    {
+      "name": "auto_loan",
+      "min_payment": "62370.00",
+      "balance": "2900000.00",
+      "interest": "16.99",
+      "next_pay_date": "2024-09-07"
+    },
+    {
+      "name": "mortgage",
+      "min_payment": "10000.00",
+      "balance": "595000.00",
+      "interest": "11.25",
+      "next_pay_date": "2024-09-10"
+    }
+  ]
+}

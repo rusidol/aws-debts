@@ -26,7 +26,7 @@ from datetime import datetime, date
 from math import log10, ceil
 from typing import Dict, List
 
-from .schemas import LoanReportSchema, SummaryReportSchema, SummaryReportOutSchema
+from schemas import LoanReportSchema, SummaryReportSchema, SummaryReportOutSchema
 
 JSON_INDENT_SIZE = 4
 
@@ -231,13 +231,13 @@ class Loan(object):
         return repr({self.name: self.__dict__})
 
 
-def parse_loan_data(file: str) -> List[Loan]:
+def parse_loan_data(loan_data: dict) -> List[Loan]:
     """Reads a JSON file to get the loan data.
 
     Parameters
     ----------
-    file : str
-        Path to the file containing loan data.
+    loan_data : dict
+        dict with data.
 
 
     Returns
@@ -246,7 +246,6 @@ def parse_loan_data(file: str) -> List[Loan]:
         List containing objects with loan data.
 
     """
-    loan_data = json.load(open(file))
     loans = [Loan(loan_name, data["balance"], data["interest"]/100,
                   data["min_payment"])
              for loan_name, data in loan_data.items()]
@@ -438,17 +437,17 @@ def add_months(current_date, months_to_add) -> date:
     return new_date
 
 
-def main():
+def proceed(data: dict, extra: float, start_date: date) -> SummaryReportOutSchema:
     args = {
-        "data": "example_loan_data.json",
-        "monthly_extra": 10_000,
+        "data": data,
+        "monthly_extra": extra,
         "onetime_extra":  0,
         "payment_history": True,
         "remaining_history": True,
         "balance_history": True,
         "payoff_strategy": "snowball",
         "output": "output_with_extra.json",
-        "start_date": datetime.date(datetime.now())
+        "start_date": start_date
     }
     report_no_extra = get_report(monthly_extra=0, args=args)
     report_with_extra = get_report(monthly_extra=args["monthly_extra"], args=args)
@@ -456,16 +455,14 @@ def main():
     diff_months = report_no_extra.summary_report.months - report_with_extra.summary_report.months
     diff_interest = report_no_extra.summary_report.interest_paid - report_with_extra.summary_report.interest_paid
     report_with_extra.months_saved = diff_months
-    report_with_extra.interest_saved = diff_interest
+    report_with_extra.interest_saved = round(diff_interest, 2)
     report_with_extra.debt_free_date = str(add_months(current_date=args["start_date"],
                                                                  months_to_add=report_with_extra.summary_report.months))
 
     if args["output"]:
-        json.dump(report_with_extra.model_dump(), open(args["output"], 'w'), indent=JSON_INDENT_SIZE)
+        # json.dump(report_with_extra.model_dump(), open(args["output"], 'w'), indent=JSON_INDENT_SIZE)
+        return report_with_extra
 
     else:
-        print(json.dumps(report_with_extra.model_dump(), indent=JSON_INDENT_SIZE))
-
-
-if __name__ == "__main__":
-    main()
+        # print(json.dumps(report_with_extra.model_dump(), indent=JSON_INDENT_SIZE))
+        return report_with_extra

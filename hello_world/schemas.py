@@ -1,3 +1,6 @@
+import datetime
+import enum
+
 from pydantic import BaseModel, ConfigDict
 
 
@@ -7,10 +10,24 @@ class BaseSchema(BaseModel):
 
 class DebtInSchema(BaseSchema):
     name: str
+    min_payment: float
+    balance: float
+    interest: float
+    next_pay_date: datetime.date
+    priority: int = 0
+
+
+class PaymentStrategy(enum.Enum):
+    snowball = "snowball"
+    priority = "priority"
+    avalanche = "avalanche"
+    minimum_only = "minimum_only"
 
 
 class DebtsInSchema(BaseSchema):
     debts: list[DebtInSchema]
+    extra: float
+    strategy: PaymentStrategy
 
 
 class BaseReportSchema(BaseSchema):

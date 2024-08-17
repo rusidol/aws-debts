@@ -1,0 +1,39 @@
+{
+    "loan_reports": [
+        {
+            "months": 35,
+            "principal_paid": 595000.0,
+            "interest_paid": 98170.28,
+            "total": 693170.28,
+            "balance_history": null,
+            "payment_history": null,
+            "payments_remaining_history": null
+        },
+        {
+            "months": 63,
+            "principal_paid": 2900000.0,
+            "interest_paid": 1562100.52,
+            "total": 4462100.52,
+            "balance_history": null,
+            "payment_history": null,
+            "payments_remaining_history": null
+        }
+    ],
+    "summary_report": {
+        "months": 63,
+        "principal_paid": 3495000.0,
+        "interest_paid": 1660270.8,
+        "total": 5155270.8,
+        "balance_history": null,
+        "payment_history": null,
+        "payments_remaining_history": null,
+        "payoff_strategy": "snowball",
+        "payoff_order": [
+            "mortgage",
+            "auto_loan"
+        ]
+    },
+    "interest_saved": 348552.94999999995,
+    "months_saved": 14,
+    "debt_free_date": "2029-11-17"
+}
